@@ -26,6 +26,7 @@ An ai powered smart cooking app designed to help users discover recipes, track m
 
 - 3.1.1: Users can register and log in securely
 - 3.1.2: Users can manage their profiles. Identity is split into a permanent, unique username (set once at signup, never editable - avoids other users being confused by a renamed identity, or someone else claiming a freed-up handle) and a freely-editable display_name (cosmetic, not unique) plus email (also editable).
+- 3.1.3: Users can change their password once logged in, and must re-enter their current password to do so (prevents a hijacked session alone from being enough to lock out the real owner).
 
 ### 3.2 User Functionality
 
@@ -121,6 +122,7 @@ The System Context Diagram provides a very high level overview of how PantryCart
 - [x] Create login/signup pages
 - [x] Connect authentication routes to the frontend so login/signup is possible from the UI
 - [x] Create FE for account page (view permanent username, edit display name and email, logout)
+- [x] Change password while logged in (requires re-entering current password)
 - [ ] Create BE routes for uploading profile images (via Supabase Storage)
 - [ ] Create admin functionality for app management
 
@@ -162,6 +164,7 @@ The System Context Diagram provides a very high level overview of how PantryCart
 ### Week 3 - User Profiles
 
 - [x] Create FE for account page (view permanent username, edit display name and email, logout)
+- [x] Change password while logged in (requires re-entering current password)
 - [ ] Create BE routes for uploading profile images (via Supabase Storage)
 
 ### Week 4 & 5 - Recipe Browsing + Filtering

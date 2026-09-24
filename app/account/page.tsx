@@ -4,6 +4,7 @@ import { supabaseAdmin } from "@/lib/supabase/admin";
 import AppHeader from "@/app/_components/app-header";
 import AccountSidebar from "@/app/account/account-sidebar";
 import ProfileSection from "@/app/account/profile-section";
+import PasswordSection from "@/app/account/password-section";
 
 const PLACEHOLDER_FAVORITE_COUNT = 6;
 
@@ -34,6 +35,11 @@ export default async function AccountPage() {
           <section id="profile" className="scroll-mt-24">
             <h1 className="mb-4 text-2xl font-bold">Profile</h1>
             <ProfileSection initialUser={user} />
+          </section>
+
+          <section id="security" className="scroll-mt-24">
+            <h2 className="mb-4 text-2xl font-bold">Security</h2>
+            <PasswordSection />
           </section>
 
           <section id="favorites" className="scroll-mt-24">

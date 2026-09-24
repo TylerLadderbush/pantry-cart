@@ -17,14 +17,16 @@ const displayNameSchema = z
   .min(1, { error: "Display name cannot be empty." })
   .max(50, { error: "Display name must be at most 50 characters long." });
 
+const passwordSchema = z
+  .string()
+  .min(12, { error: "Password must be at least 12 characters long." })
+  .regex(/[A-Z]/, { error: "Password must contain at least one uppercase letter." })
+  .regex(/[^a-zA-Z0-9]/, { error: "Password must contain at least one special character." });
+
 export const SignupSchema = z.object({
   username: usernameSchema,
   email: emailSchema,
-  password: z
-    .string()
-    .min(12, { error: "Password must be at least 12 characters long." })
-    .regex(/[A-Z]/, { error: "Password must contain at least one uppercase letter." })
-    .regex(/[^a-zA-Z0-9]/, { error: "Password must contain at least one special character." }),
+  password: passwordSchema,
 });
 
 export const LoginSchema = z.object({
@@ -44,6 +46,11 @@ export const UpdateProfileSchema = z
   .refine((data) => data.email !== undefined || data.display_name !== undefined, {
     error: "At least one of email or display_name must be provided.",
   });
+
+export const ChangePasswordSchema = z.object({
+  currentPassword: z.string().min(1, { error: "Current password is required." }),
+  newPassword: passwordSchema,
+});
 
 export type SessionPayload = {
   sessionId: string;
