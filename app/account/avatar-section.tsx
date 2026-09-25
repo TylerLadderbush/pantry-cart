@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useRef, useState, type ChangeEvent } from "react";
 import {
   ALLOWED_AVATAR_MIME_TYPES,
@@ -9,6 +10,7 @@ import {
 } from "@/lib/avatar";
 
 export default function AvatarSection({ initialAvatarUrl }: { initialAvatarUrl: string | null }) {
+  const router = useRouter();
   const [avatarUrl, setAvatarUrl] = useState(initialAvatarUrl);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
@@ -47,6 +49,7 @@ export default function AvatarSection({ initialAvatarUrl }: { initialAvatarUrl: 
     }
 
     setAvatarUrl(body.avatar_url);
+    router.refresh();
   }
 
   async function handleDelete() {
@@ -63,6 +66,7 @@ export default function AvatarSection({ initialAvatarUrl }: { initialAvatarUrl: 
     }
 
     setAvatarUrl(null);
+    router.refresh();
   }
 
   return (
