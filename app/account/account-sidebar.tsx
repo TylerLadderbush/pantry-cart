@@ -21,12 +21,12 @@ export default function AccountSidebar() {
   }
 
   return (
-    <nav className="flex w-full flex-col gap-1 md:w-48 md:shrink-0">
+    <nav className="flex w-full flex-col gap-1 md:w-36 md:shrink-0">
       {NAV_ITEMS.map((item) => (
         <a
           key={item.href}
           href={item.href}
-          className="rounded px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+          className="-ml-3 rounded px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
         >
           {item.label}
         </a>
@@ -38,7 +38,7 @@ export default function AccountSidebar() {
         type="button"
         onClick={handleLogout}
         disabled={loggingOut}
-        className="rounded px-3 py-2 text-left text-sm font-medium text-red-600 hover:bg-red-50 disabled:opacity-50"
+        className="-ml-3 rounded px-3 py-2 text-left text-sm font-medium text-red-600 hover:bg-red-50 disabled:opacity-50"
       >
         {loggingOut ? "Logging out..." : "Log Out"}
       </button>

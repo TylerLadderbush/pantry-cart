@@ -1,26 +1,16 @@
 import { redirect } from "next/navigation";
-import { verifySession } from "@/lib/auth/session";
-import { supabaseAdmin } from "@/lib/supabase/admin";
+import { getCurrentUser } from "@/lib/auth/dal";
 import AppHeader from "@/app/_components/app-header";
 import AccountSidebar from "@/app/account/account-sidebar";
 import ProfileSection from "@/app/account/profile-section";
 import PasswordSection from "@/app/account/password-section";
+import AvatarSection from "@/app/account/avatar-section";
 
 const PLACEHOLDER_FAVORITE_COUNT = 6;
 
 export default async function AccountPage() {
-  const session = await verifySession();
-  if (!session) {
-    redirect("/login");
-  }
-
-  const { data: user, error } = await supabaseAdmin
-    .from("users")
-    .select("id, username, display_name, email, created_at")
-    .eq("id", session.userId)
-    .maybeSingle();
-
-  if (error || !user) {
+  const user = await getCurrentUser();
+  if (!user) {
     redirect("/login");
   }
 
@@ -28,17 +18,20 @@ export default async function AccountPage() {
     <main className="min-h-screen bg-stone-50 text-gray-900">
       <AppHeader />
 
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-8 py-10 md:flex-row">
+      <div className="mx-auto flex max-w-7xl flex-col gap-8 px-8 py-10 md:flex-row">
         <AccountSidebar />
 
         <div className="flex flex-1 flex-col gap-12">
           <section id="profile" className="scroll-mt-24">
-            <h1 className="mb-4 text-2xl font-bold">Profile</h1>
-            <ProfileSection initialUser={user} />
+            <h1 className="mb-4 ml-20 text-2xl font-bold">Profile</h1>
+            <div className="ml-20 max-w-3xl divide-y rounded-lg border">
+              <AvatarSection initialAvatarUrl={user.avatar_url} />
+              <ProfileSection initialUser={user} />
+            </div>
           </section>
 
           <section id="security" className="scroll-mt-24">
-            <h2 className="mb-4 text-2xl font-bold">Security</h2>
+            <h2 className="mb-4 ml-20 text-2xl font-bold">Security</h2>
             <PasswordSection />
           </section>
 

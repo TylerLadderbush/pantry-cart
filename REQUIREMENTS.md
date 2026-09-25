@@ -95,7 +95,7 @@ Describe the data inputs, outputs, storage, and processing needs.
 
 **Storage:**
 
-- Stores profile data, favorite recipes, recipe list, user-created recipes, recipe ratings, and recipe comments.
+- Stores profile data (including an optional profile picture in Supabase Storage), favorite recipes, recipe list, user-created recipes, recipe ratings, and recipe comments.
 - A separate admins table tracks which user ids have admin privileges (see 3.4.4).
 
 **Processing:**
@@ -123,7 +123,7 @@ The System Context Diagram provides a very high level overview of how PantryCart
 - [x] Connect authentication routes to the frontend so login/signup is possible from the UI
 - [x] Create FE for account page (view permanent username, edit display name and email, logout)
 - [x] Change password while logged in (requires re-entering current password)
-- [ ] Create BE routes for uploading profile images (via Supabase Storage)
+- [x] Upload/delete profile pictures (server-side resized/cropped to a 400x400 square via sharp, stored in Supabase Storage, default stock image shown until a user uploads their own)
 - [ ] Create admin functionality for app management
 
 ### Benchmark 2 - Recipe search implementation, creation, and interaction
@@ -165,7 +165,7 @@ The System Context Diagram provides a very high level overview of how PantryCart
 
 - [x] Create FE for account page (view permanent username, edit display name and email, logout)
 - [x] Change password while logged in (requires re-entering current password)
-- [ ] Create BE routes for uploading profile images (via Supabase Storage)
+- [x] Upload/delete profile pictures (server-side resized/cropped to a 400x400 square via sharp, stored in Supabase Storage, default stock image shown until a user uploads their own)
 
 ### Week 4 & 5 - Recipe Browsing + Filtering
 

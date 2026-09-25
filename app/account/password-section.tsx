@@ -47,7 +47,7 @@ export default function PasswordSection() {
   }
 
   return (
-    <div className="rounded-lg border p-4">
+    <div className="ml-20 max-w-3xl rounded-lg border p-4">
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex flex-col gap-1">
           <label htmlFor="currentPassword" className="text-sm text-gray-500">

@@ -2,6 +2,7 @@ import "server-only";
 
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
+import { cache } from "react";
 import type { SessionPayload } from "@/lib/auth/definitions";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 
@@ -58,7 +59,13 @@ export async function createSession(userId: string) {
   });
 }
 
-export async function verifySession(): Promise<{ userId: string } | null> {
+// Wrapped in React's cache() so that within a single request, no matter how
+// many components independently call verifySession() (e.g. a page and the
+// shared header it renders), the database lookup only runs once. This does
+// NOT persist across requests/navigations - each new request re-verifies
+// from scratch, which is what we want for a security-sensitive check like
+// this (e.g. a revoked session must be rejected on the very next request).
+export const verifySession = cache(async (): Promise<{ userId: string } | null> => {
   const cookieStore = await cookies();
   const cookieValue = cookieStore.get(SESSION_COOKIE_NAME)?.value;
   const payload = await decrypt(cookieValue);
@@ -86,7 +93,7 @@ export async function verifySession(): Promise<{ userId: string } | null> {
   }
 
   return { userId: sessionRow.user_id };
-}
+});
 
 export async function deleteSession() {
   const cookieStore = await cookies();

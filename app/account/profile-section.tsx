@@ -69,7 +69,7 @@ export default function ProfileSection({ initialUser }: { initialUser: User }) {
   }
 
   return (
-    <div className="divide-y rounded-lg border">
+    <>
       <div className="flex items-center justify-between gap-4 px-4 py-4">
         <div>
           <p className="text-sm text-gray-500">Username</p>
@@ -133,6 +133,6 @@ export default function ProfileSection({ initialUser }: { initialUser: User }) {
           )}
         </div>
       ))}
-    </div>
+    </>
   );
 }
