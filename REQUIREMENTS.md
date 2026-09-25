@@ -198,3 +198,12 @@ The System Context Diagram provides a very high level overview of how PantryCart
 ### Week 14 - Final Deployment
 
 - [ ] Ensure that the app functions properly under load and fix any errors.
+
+## Backlog (Not Yet Scheduled)
+
+Security/auth hardening and maintenance identified during development, deliberately deferred rather than built now. Not tied to a specific week - pull into a week's scope whenever there's room.
+
+- [ ] Password reset ("forgot password") flow, so a user who forgets their password isn't permanently locked out.
+- [ ] Rate limiting on login, signup, and password-change endpoints, to prevent brute-force password guessing.
+- [ ] Email verification at signup, so accounts can't be created with an email address the signer-upper doesn't own.
+- [ ] Expired session cleanup (e.g. delete a user's own expired session rows on their next login, and/or a scheduled `pg_cron` job) - the sessions table currently grows forever since nothing ever deletes expired rows. Not urgent at the current ~1000-user scale (rough math puts it at tens of MB/year even under active use), but worth doing before it's a real storage concern.
