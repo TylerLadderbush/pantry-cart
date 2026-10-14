@@ -128,8 +128,11 @@ The System Context Diagram provides a very high level overview of how PantryCart
 
 ### Benchmark 2 - Recipe search implementation, creation, and interaction
 
-- [ ] Connect external api to backend routes, make api routes for fetching recipes and filtering them.
-- [ ] Make Routes for favoriting recipes, rating a recipe, and commenting on a recipe.
+- [x] Connect external api to backend routes, make api routes for fetching recipes and filtering them (Spoonacular, with a reactive database cache in public.recipes to minimize API usage, fetched in batches via infinite scroll on the home page to further limit API calls).
+- [x] Make routes for favoriting recipes (star a recipe from the home page, view/search favorites on the profile page).
+- [x] Recipe detail page (/recipes/[recipeId]) showing every public.recipes field - handles both Spoonacular recipes (fetches and caches full detail + ingredients from Spoonacular on first view) and user recipes (already fully populated, no external call).
+- [x] Make routes for rating a recipe (public.recipe_ratings, one rating per user per recipe). Works for both Spoonacular and user recipes; when a recipe has zero local ratings, falls back to Spoonacular's own spoonacular_score (already cached from the detail fetch above - no extra API call) scaled to a 1-5 star equivalent.
+- [x] Make routes for commenting on a recipe (public.recipe_comments, author's display name + avatar shown per comment). User-submitted only - no Spoonacular equivalent.
 - [ ] Make routes for user made recipes.
 
 ### Benchmark 3 - Recipe and shopping list generation
@@ -169,11 +172,14 @@ The System Context Diagram provides a very high level overview of how PantryCart
 
 ### Week 4 & 5 - Recipe Browsing + Filtering
 
-- [ ] Connect external api to backend routes, make api routes for fetching recipes and filtering them.
+- [x] Connect external api to backend routes, make api routes for fetching recipes and filtering them (Spoonacular, with a reactive database cache in public.recipes to minimize API usage, fetched in batches via infinite scroll on the home page to further limit API calls).
 
 ### Week 6 - Favorites, Ratings, and Comments
 
-- [ ] Make Routes for favoriting recipes, rating a recipe, and commenting on a recipe.
+- [x] Make routes for favoriting recipes (star a recipe from the home page, view/search favorites on the profile page).
+- [x] Recipe detail page (/recipes/[recipeId]) showing every public.recipes field - handles both Spoonacular recipes (fetches and caches full detail + ingredients from Spoonacular on first view) and user recipes (already fully populated, no external call).
+- [x] Make routes for rating a recipe (public.recipe_ratings, one rating per user per recipe). Works for both Spoonacular and user recipes; when a recipe has zero local ratings, falls back to Spoonacular's own spoonacular_score (already cached from the detail fetch above - no extra API call) scaled to a 1-5 star equivalent.
+- [x] Make routes for commenting on a recipe (public.recipe_comments, author's display name + avatar shown per comment). User-submitted only - no Spoonacular equivalent.
 
 ### Week 7 - User Created Recipes
 

@@ -86,6 +86,17 @@ describe("route protection (proxy.ts)", () => {
     expect(res.headers.get("location")).toContain("/login");
   });
 
+  it("redirects an unauthenticated request from /recipes/[id] to /login", async () => {
+    // The proxy matches on the path prefix before the page ever runs, so a
+    // nonsense id here never touches the database - it's rejected before
+    // that.
+    const res = await fetch(`${BASE_URL}/recipes/00000000-0000-0000-0000-000000000000`, {
+      redirect: "manual",
+    }).then(drained);
+    expect(res.status).toBe(307);
+    expect(res.headers.get("location")).toContain("/login");
+  });
+
   it("does not redirect an unauthenticated request away from the landing page", async () => {
     const res = await fetch(BASE_URL, { redirect: "manual" }).then(drained);
     expect(res.status).toBe(200);
